@@ -110,15 +110,15 @@ class Seq:
             result += Seq.BASES_COMPLEMENTS(base)
             return result
 
-    def read_fasta(self, filename):
+    def read_fasta(self, file_name):
         from pathlib import Path
 
         file_contents = Path(filename).read_text()
         lines = file_contents.splitlines()
         body = lines[1:]
         self.bases = ""
-        for lines in body:
-            self.bases += lines
+        for line in body:
+            self.bases += line
 
     def frequent_base(self):
         bases = ["A", "C", "G", "T"]
