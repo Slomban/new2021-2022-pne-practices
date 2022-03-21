@@ -1,6 +1,7 @@
 
 class Seq:
-    """A class for representing sequences"""
+    BASES_ALLOWED = ['A', 'C', 'T', 'G']
+    BASES_COMPLEMENTS = {"A": "T", "T": "A", "G": "C", "C": "G"}
     def __init__(self, strbases="NULL"):
         self.strbases = strbases
         if strbases == "NULL":
@@ -69,13 +70,11 @@ class Seq:
         return A, T, C, G
 
     def count(self):
-        bases_dict = {"A": 0, "T": 0, "C": 0, "G": 0}
-        if self.strbases == "NULL" or self.strbases == "ERROR":
-            return bases_dict
-        else:
-            for e in self.strbases:
-                bases_dict[e] += 1
-            return bases_dict
+        result = {}
+        for base in Seq.BASES_ALLOWED:
+            result[base] = self.count_base(base)
+            return result
+
 
     def reverse(self):
         reversed_seq = ""
